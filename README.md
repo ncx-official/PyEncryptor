@@ -24,11 +24,3 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 ## License
-
-
-
-## Contact
-
-Vitalii Nasikovskyi - https://t.me/nasikovskyi_official - nasikovskyi.v@gmail.com
-
-Project Link: github(https://github.com/ncx-official/PyCryptStorage)
