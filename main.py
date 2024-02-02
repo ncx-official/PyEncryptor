@@ -44,12 +44,3 @@ from decrypt_data import decrypt_text, decrypt_file
 # if __name__ == "__main__":
 #     app = App()
 #     app.mainloop()
-
-password = "123452"
-text = "Hello world3!"
-
-enc_text = encrypt_text(text=text, password=password)
-print(enc_text)
-
-dec_text = decrypt_text(encrypted_text=enc_text, password=password)
-print(dec_text)
