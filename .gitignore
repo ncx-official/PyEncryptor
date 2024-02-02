@@ -1,6 +1,7 @@
 # Custom
 archive/
 .idea/
+TestData/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

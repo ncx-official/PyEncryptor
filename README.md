@@ -7,7 +7,10 @@ PyCryptStorage is a secure file storage application that enables users to encryp
 
 
 ## Installation
-
+1) Install the cryptography library:
+```
+pip install cryptography
+```
 
 ## Documentation
 
