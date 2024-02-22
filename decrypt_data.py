@@ -21,7 +21,7 @@ def decrypt_text(encrypted_text, password):
     decrypted_text = cipher_suite.decrypt(encrypted_text[16:]).decode() # Skip the first 16-bytes (salt)
     return decrypted_text
 
-def decrypt_file(encrypted_file_path, password):
+def decrypt_file(encrypted_file_path, password, save_file_path):
     with open(encrypted_file_path, 'rb') as encrypted_file:
         encrypted_data = encrypted_file.read()
 
@@ -30,6 +30,5 @@ def decrypt_file(encrypted_file_path, password):
     cipher_suite = Fernet(key)
     decrypted_data = cipher_suite.decrypt(encrypted_data[:-16]) # Skip the last 16 bytes (salt)
 
-    original_file_path = encrypted_file_path[:-4]  # Remove '.enc' extension
-    with open(original_file_path, 'wb') as original_file:
+    with open(save_file_path, 'wb') as original_file:
         original_file.write(decrypted_data)

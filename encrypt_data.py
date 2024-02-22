@@ -21,7 +21,7 @@ def encrypt_text(text, password): # Text encryption, symmetric key encryption (A
     encrypted_text = cipher_suite.encrypt(text.encode()) # convert string to bytes then encrypt
     return salt.hex() + encrypted_text.hex() # 16-byte salt and encrypted text into hex (just for good human readability)
 
-def encrypt_file(file_path, password):
+def encrypt_file(file_path, password, save_file_path):
     with open(file_path, 'rb') as file:
         file_data = file.read() # get bytes
 
@@ -29,5 +29,5 @@ def encrypt_file(file_path, password):
     cipher_suite = Fernet(key)
     encrypted_data = cipher_suite.encrypt(file_data) # encrypt bytes
 
-    with open(file_path + ".enc", 'wb') as encrypted_file:
+    with open(save_file_path, 'wb') as encrypted_file:
         encrypted_file.write(encrypted_data + salt) # Add salt to encrypted file for use in decryption (last 16-byte)
