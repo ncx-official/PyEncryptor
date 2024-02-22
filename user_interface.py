@@ -5,10 +5,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QLabel,
-    QLineEdit, QMainWindow, QMenuBar, QPushButton,
-    QSizePolicy, QStackedWidget, QTabWidget, QTextEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QFrame, QFileDialog,
+    QLabel, QLineEdit, QMainWindow, QMenuBar,
+    QProgressBar, QPushButton, QRadioButton, QSizePolicy,
+    QStackedWidget, QTabWidget, QTextEdit, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -127,21 +128,23 @@ class Ui_MainWindow(object):
         self.OutputEncryptionTextBox = QTextEdit(self.EncryptTextTab)
         self.OutputEncryptionTextBox.setObjectName(u"OutputEncryptionTextBox")
         self.OutputEncryptionTextBox.setGeometry(QRect(30, 270, 451, 71))
-        self.label_4 = QLabel(self.EncryptTextTab)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setGeometry(QRect(40, 20, 61, 16))
-        self.label_2 = QLabel(self.EncryptTextTab)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(40, 130, 61, 16))
-        self.label_3 = QLabel(self.EncryptTextTab)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(40, 240, 121, 16))
+        self.OutputEncryptionTextBox.setReadOnly(True)
+        self.labelText_1 = QLabel(self.EncryptTextTab)
+        self.labelText_1.setObjectName(u"labelText_1")
+        self.labelText_1.setGeometry(QRect(40, 20, 61, 16))
+        self.labelText_2 = QLabel(self.EncryptTextTab)
+        self.labelText_2.setObjectName(u"labelText_2")
+        self.labelText_2.setGeometry(QRect(40, 130, 61, 16))
+        self.labelText_3 = QLabel(self.EncryptTextTab)
+        self.labelText_3.setObjectName(u"labelText_3")
+        self.labelText_3.setGeometry(QRect(40, 240, 121, 16))
         self.TextTabWidget.addTab(self.EncryptTextTab, "")
         self.DecryptTextTab = QWidget()
         self.DecryptTextTab.setObjectName(u"DecryptTextTab")
         self.OutputDecryptionTextBox = QTextEdit(self.DecryptTextTab)
         self.OutputDecryptionTextBox.setObjectName(u"OutputDecryptionTextBox")
         self.OutputDecryptionTextBox.setGeometry(QRect(30, 270, 451, 71))
+        self.OutputDecryptionTextBox.setReadOnly(True)
         self.DecryptTextButton = QPushButton(self.DecryptTextTab)
         self.DecryptTextButton.setObjectName(u"DecryptTextButton")
         self.DecryptTextButton.setGeometry(QRect(400, 380, 75, 24))
@@ -151,28 +154,62 @@ class Ui_MainWindow(object):
         self.InputDecryptionPasswordLine = QLineEdit(self.DecryptTextTab)
         self.InputDecryptionPasswordLine.setObjectName(u"InputDecryptionPasswordLine")
         self.InputDecryptionPasswordLine.setGeometry(QRect(30, 150, 191, 22))
-        self.label_7 = QLabel(self.DecryptTextTab)
-        self.label_7.setObjectName(u"label_7")
-        self.label_7.setGeometry(QRect(40, 20, 111, 16))
-        self.label_5 = QLabel(self.DecryptTextTab)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setGeometry(QRect(40, 130, 111, 16))
-        self.label_6 = QLabel(self.DecryptTextTab)
-        self.label_6.setObjectName(u"label_6")
-        self.label_6.setGeometry(QRect(40, 240, 131, 16))
+        self.labelText_4 = QLabel(self.DecryptTextTab)
+        self.labelText_4.setObjectName(u"labelText_4")
+        self.labelText_4.setGeometry(QRect(40, 20, 111, 16))
+        self.labelText_5 = QLabel(self.DecryptTextTab)
+        self.labelText_5.setObjectName(u"labelText_5")
+        self.labelText_5.setGeometry(QRect(40, 130, 111, 16))
+        self.labelText_6 = QLabel(self.DecryptTextTab)
+        self.labelText_6.setObjectName(u"labelText_6")
+        self.labelText_6.setGeometry(QRect(40, 240, 131, 16))
         self.TextTabWidget.addTab(self.DecryptTextTab, "")
         self.stackedWidget.addWidget(self.TextStackedWidget)
         self.FileStackedWidget = QWidget()
         self.FileStackedWidget.setObjectName(u"FileStackedWidget")
-        self.FileTabWidget = QTabWidget(self.FileStackedWidget)
-        self.FileTabWidget.setObjectName(u"FileTabWidget")
-        self.FileTabWidget.setGeometry(QRect(0, 0, 511, 441))
-        self.EncryptFileTab = QWidget()
-        self.EncryptFileTab.setObjectName(u"EncryptFileTab")
-        self.FileTabWidget.addTab(self.EncryptFileTab, "")
-        self.DecryptFileTab = QWidget()
-        self.DecryptFileTab.setObjectName(u"DecryptFileTab")
-        self.FileTabWidget.addTab(self.DecryptFileTab, "")
+        self.progressFileBar = QProgressBar(self.FileStackedWidget)
+        self.progressFileBar.setObjectName(u"progressFileBar")
+        self.progressFileBar.setGeometry(QRect(40, 50, 471, 61))
+        self.progressFileBar.setValue(0)
+        self.pushOpenFileButton = QPushButton(self.FileStackedWidget)
+        self.pushOpenFileButton.setObjectName(u"pushOpenFileButton")
+        self.pushOpenFileButton.setGeometry(QRect(390, 170, 101, 41))
+        self.pushFileActionButton = QPushButton(self.FileStackedWidget)
+        self.pushFileActionButton.setObjectName(u"pushFileActionButton")
+        self.pushFileActionButton.setGeometry(QRect(40, 400, 451, 51))
+        self.radioDecryptionButton = QRadioButton(self.FileStackedWidget)
+        self.buttonGroup = QButtonGroup(MainWindow)
+        self.buttonGroup.setObjectName(u"buttonGroup")
+        self.buttonGroup.addButton(self.radioDecryptionButton)
+        self.radioDecryptionButton.setObjectName(u"radioDecryptionButton")
+        self.radioDecryptionButton.setGeometry(QRect(280, 280, 89, 20))
+        self.radioEncryptionButton = QRadioButton(self.FileStackedWidget)
+        self.buttonGroup.addButton(self.radioEncryptionButton)
+        self.radioEncryptionButton.setObjectName(u"radioEncryptionButton")
+        self.radioEncryptionButton.setGeometry(QRect(280, 250, 89, 20))
+        self.radioEncryptionButton.setChecked(True)
+        self.lineFilePath = QLineEdit(self.FileStackedWidget)
+        self.lineFilePath.setObjectName(u"lineFilePath")
+        self.lineFilePath.setGeometry(QRect(100, 180, 281, 22))
+        self.lineFilePath.setReadOnly(True)
+        self.labelFile_1 = QLabel(self.FileStackedWidget)
+        self.labelFile_1.setObjectName(u"labelFile_1")
+        self.labelFile_1.setGeometry(QRect(40, 180, 51, 21))
+        self.labelFile_3 = QLabel(self.FileStackedWidget)
+        self.labelFile_3.setObjectName(u"labelFile_3")
+        self.labelFile_3.setGeometry(QRect(30, 260, 61, 21))
+        self.lineFilePassword = QLineEdit(self.FileStackedWidget)
+        self.lineFilePassword.setObjectName(u"lineFilePassword")
+        self.lineFilePassword.setGeometry(QRect(100, 260, 141, 22))
+        self.checkFilePasswordBox = QCheckBox(self.FileStackedWidget)
+        self.checkFilePasswordBox.setObjectName(u"checkFilePasswordBox")
+        self.checkFilePasswordBox.setGeometry(QRect(100, 290, 111, 20))
+        self.lineFilePassword_2 = QLineEdit(self.FileStackedWidget)
+        self.lineFilePassword_2.setObjectName(u"lineFilePassword_2")
+        self.lineFilePassword_2.setGeometry(QRect(100, 220, 141, 22))
+        self.labelFile_2 = QLabel(self.FileStackedWidget)
+        self.labelFile_2.setObjectName(u"labelFile_2")
+        self.labelFile_2.setGeometry(QRect(0, 220, 91, 21))
         self.stackedWidget.addWidget(self.FileStackedWidget)
         self.ContainerStackedWidget = QWidget()
         self.ContainerStackedWidget.setObjectName(u"ContainerStackedWidget")
@@ -186,13 +223,13 @@ class Ui_MainWindow(object):
         self.OpenContainerTab.setObjectName(u"OpenContainerTab")
         self.ContainerTabWidget.addTab(self.OpenContainerTab, "")
         self.stackedWidget.addWidget(self.ContainerStackedWidget)
-        self.widget = QWidget(self.centralwidget)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(0, 60, 111, 161))
-        self.verticalLayout = QVBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.centralwidget)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(0, 60, 111, 161))
+        self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushTextButton = QPushButton(self.widget)
+        self.pushTextButton = QPushButton(self.layoutWidget)
         self.sidePanelButtonGroup = QButtonGroup(MainWindow)
         self.sidePanelButtonGroup.setObjectName(u"sidePanelButtonGroup")
         self.sidePanelButtonGroup.addButton(self.pushTextButton)
@@ -203,7 +240,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.pushTextButton)
 
-        self.pushFileButton = QPushButton(self.widget)
+        self.pushFileButton = QPushButton(self.layoutWidget)
         self.sidePanelButtonGroup.addButton(self.pushFileButton)
         self.pushFileButton.setObjectName(u"pushFileButton")
         self.pushFileButton.setMinimumSize(QSize(0, 40))
@@ -211,7 +248,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.pushFileButton)
 
-        self.pushContainerButton = QPushButton(self.widget)
+        self.pushContainerButton = QPushButton(self.layoutWidget)
         self.sidePanelButtonGroup.addButton(self.pushContainerButton)
         self.pushContainerButton.setObjectName(u"pushContainerButton")
         self.pushContainerButton.setMinimumSize(QSize(0, 40))
@@ -229,40 +266,48 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(0)
         self.TextTabWidget.setCurrentIndex(0)
-        self.FileTabWidget.setCurrentIndex(0)
         self.ContainerTabWidget.setCurrentIndex(0)
 
-
-        QMetaObject.connectSlotsByName(MainWindow)
-
-        # Buttons
+        # Buttons (Do not delete)
         self.pushTextButton.clicked.connect(self.displayTextStackedWidget)
         self.pushFileButton.clicked.connect(self.displayFileStackedWidget)
         self.pushContainerButton.clicked.connect(self.displayContainerStackedWidget)
+        self.pushOpenFileButton.clicked.connect(self.displayFileDialogWidget)
+        self.radioEncryptionButton.clicked.connect(self.onRadioFileButtonClicked)
+        self.radioDecryptionButton.clicked.connect(self.onRadioFileButtonClicked)
+        self.radioEncryptionButton.click()
+
+        QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"AES PyEncryptor", None))
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Logs", None))
         self.EncryptTextButton.setText(QCoreApplication.translate("MainWindow", u"Encrypt", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Input Text", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Password", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Output Encrypted Text", None))
+        self.labelText_1.setText(QCoreApplication.translate("MainWindow", u"Input Text", None))
+        self.labelText_2.setText(QCoreApplication.translate("MainWindow", u"Password", None))
+        self.labelText_3.setText(QCoreApplication.translate("MainWindow", u"Output Encrypted Text", None))
         self.TextTabWidget.setTabText(self.TextTabWidget.indexOf(self.EncryptTextTab), QCoreApplication.translate("MainWindow", u"Encryption", None))
         self.DecryptTextButton.setText(QCoreApplication.translate("MainWindow", u"Decrypt", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Input Encrypted Text", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Password", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Output Decrypted Text", None))
+        self.labelText_4.setText(QCoreApplication.translate("MainWindow", u"Input Encrypted Text", None))
+        self.labelText_5.setText(QCoreApplication.translate("MainWindow", u"Password", None))
+        self.labelText_6.setText(QCoreApplication.translate("MainWindow", u"Output Decrypted Text", None))
         self.TextTabWidget.setTabText(self.TextTabWidget.indexOf(self.DecryptTextTab), QCoreApplication.translate("MainWindow", u"Decryption", None))
-        self.FileTabWidget.setTabText(self.FileTabWidget.indexOf(self.EncryptFileTab), QCoreApplication.translate("MainWindow", u"Encryption", None))
-        self.FileTabWidget.setTabText(self.FileTabWidget.indexOf(self.DecryptFileTab), QCoreApplication.translate("MainWindow", u"Decryption", None))
+        self.pushOpenFileButton.setText(QCoreApplication.translate("MainWindow", u"OpenFile", None))
+        self.pushFileActionButton.setText(QCoreApplication.translate("MainWindow", u"Encrypt", None))
+        self.radioDecryptionButton.setText(QCoreApplication.translate("MainWindow", u"Decryption", None))
+        self.radioEncryptionButton.setText(QCoreApplication.translate("MainWindow", u"Encryption", None))
+        self.labelFile_1.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">File Path</span></p></body></html>", None))
+        self.labelFile_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">Password</span></p></body></html>", None))
+        self.checkFilePasswordBox.setText(QCoreApplication.translate("MainWindow", u"Show password", None))
+        self.labelFile_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">New File Name</span></p></body></html>", None))
         self.ContainerTabWidget.setTabText(self.ContainerTabWidget.indexOf(self.CreateContainerTab), QCoreApplication.translate("MainWindow", u"Create", None))
         self.ContainerTabWidget.setTabText(self.ContainerTabWidget.indexOf(self.OpenContainerTab), QCoreApplication.translate("MainWindow", u"Open", None))
         self.pushTextButton.setText(QCoreApplication.translate("MainWindow", u"Text", None))
         self.pushFileButton.setText(QCoreApplication.translate("MainWindow", u"File", None))
         self.pushContainerButton.setText(QCoreApplication.translate("MainWindow", u"Container", None))
     # retranslateUi
-    
+
     def displayTextStackedWidget(self):
         # Find the index of self.TextStackedWidget in self.stackedWidget
         index = self.stackedWidget.indexOf(self.TextStackedWidget)
@@ -277,3 +322,26 @@ class Ui_MainWindow(object):
         # Find the index of self.ContainerStackedWidget in self.stackedWidget
         index = self.stackedWidget.indexOf(self.ContainerStackedWidget)
         self.stackedWidget.setCurrentIndex(index)
+    
+    def displayFileDialogWidget(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        # For a single file
+        fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "",
+                                                  "All Files (*);;Python Files (*.py)", options=options)
+        if fileName:
+            self.lineFilePath.setText(fileName)
+
+    def onRadioFileButtonClicked(self):
+        # Determine which button was clicked
+        button = self.sender()
+        
+        if button is None or not isinstance(button, QRadioButton):
+            return
+        
+        if button.isChecked():
+            if button == self.radioEncryptionButton: # Encryption radio button is clicked
+                self.pushFileActionButton.setText("Encryption")
+
+            elif button == self.radioDecryptionButton: # Decryption radio button is clicked
+                self.pushFileActionButton.setText("Decryption")
