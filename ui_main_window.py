@@ -5,8 +5,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QFrame, QFileDialog,
-    QLabel, QLineEdit, QMainWindow, QMenuBar,
+from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QFrame,
+    QLabel, QLineEdit, QMainWindow, QMenuBar, QHBoxLayout,
     QProgressBar, QPushButton, QRadioButton, QSizePolicy,
     QStackedWidget, QTabWidget, QTextEdit, QVBoxLayout,
     QWidget)
@@ -16,14 +16,19 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(640, 480)
-        MainWindow.setMinimumSize(QSize(600, 400))
-        MainWindow.setMaximumSize(QSize(1280, 960))
+        MainWindow.setMinimumSize(QSize(640, 480))
+        MainWindow.setMaximumSize(QSize(640, 480))
+        MainWindow.setWindowOpacity(0.92)
         palette = QPalette()
         brush = QBrush(QColor(0, 0, 0, 255))
         brush.setStyle(Qt.SolidPattern)
         palette.setBrush(QPalette.Active, QPalette.WindowText, brush)
-        brush1 = QBrush(QColor(234, 234, 234, 255))
-        brush1.setStyle(Qt.SolidPattern)
+        gradient = QLinearGradient(0, 0, 1, 0)
+        gradient.setSpread(QGradient.PadSpread)
+        gradient.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient.setColorAt(1, QColor(25, 50, 70, 200))
+        brush1 = QBrush(gradient)
         palette.setBrush(QPalette.Active, QPalette.Button, brush1)
         brush2 = QBrush(QColor(255, 255, 255, 255))
         brush2.setStyle(Qt.SolidPattern)
@@ -40,22 +45,40 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Active, QPalette.Text, brush)
         palette.setBrush(QPalette.Active, QPalette.BrightText, brush2)
         palette.setBrush(QPalette.Active, QPalette.ButtonText, brush)
-        palette.setBrush(QPalette.Active, QPalette.Base, brush2)
-        palette.setBrush(QPalette.Active, QPalette.Window, brush1)
+        gradient1 = QLinearGradient(0, 0, 1, 0)
+        gradient1.setSpread(QGradient.PadSpread)
+        gradient1.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient1.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient1.setColorAt(1, QColor(25, 50, 70, 200))
+        brush6 = QBrush(gradient1)
+        palette.setBrush(QPalette.Active, QPalette.Base, brush6)
+        gradient2 = QLinearGradient(0, 0, 1, 0)
+        gradient2.setSpread(QGradient.PadSpread)
+        gradient2.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient2.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient2.setColorAt(1, QColor(25, 50, 70, 200))
+        brush7 = QBrush(gradient2)
+        palette.setBrush(QPalette.Active, QPalette.Window, brush7)
         palette.setBrush(QPalette.Active, QPalette.Shadow, brush)
         palette.setBrush(QPalette.Active, QPalette.AlternateBase, brush3)
-        brush6 = QBrush(QColor(255, 255, 220, 255))
-        brush6.setStyle(Qt.SolidPattern)
-        palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush6)
+        brush8 = QBrush(QColor(255, 255, 220, 255))
+        brush8.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.ToolTipBase, brush8)
         palette.setBrush(QPalette.Active, QPalette.ToolTipText, brush)
-        brush7 = QBrush(QColor(0, 0, 0, 127))
-        brush7.setStyle(Qt.SolidPattern)
+        brush9 = QBrush(QColor(0, 0, 0, 127))
+        brush9.setStyle(Qt.SolidPattern)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush7)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush9)
 #endif
         palette.setBrush(QPalette.Active, QPalette.Accent, brush2)
         palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
-        palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        gradient3 = QLinearGradient(0, 0, 1, 0)
+        gradient3.setSpread(QGradient.PadSpread)
+        gradient3.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient3.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient3.setColorAt(1, QColor(25, 50, 70, 200))
+        brush10 = QBrush(gradient3)
+        palette.setBrush(QPalette.Inactive, QPalette.Button, brush10)
         palette.setBrush(QPalette.Inactive, QPalette.Light, brush2)
         palette.setBrush(QPalette.Inactive, QPalette.Midlight, brush3)
         palette.setBrush(QPalette.Inactive, QPalette.Dark, brush4)
@@ -63,18 +86,36 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Inactive, QPalette.Text, brush)
         palette.setBrush(QPalette.Inactive, QPalette.BrightText, brush2)
         palette.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
-        palette.setBrush(QPalette.Inactive, QPalette.Base, brush2)
-        palette.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+        gradient4 = QLinearGradient(0, 0, 1, 0)
+        gradient4.setSpread(QGradient.PadSpread)
+        gradient4.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient4.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient4.setColorAt(1, QColor(25, 50, 70, 200))
+        brush11 = QBrush(gradient4)
+        palette.setBrush(QPalette.Inactive, QPalette.Base, brush11)
+        gradient5 = QLinearGradient(0, 0, 1, 0)
+        gradient5.setSpread(QGradient.PadSpread)
+        gradient5.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient5.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient5.setColorAt(1, QColor(25, 50, 70, 200))
+        brush12 = QBrush(gradient5)
+        palette.setBrush(QPalette.Inactive, QPalette.Window, brush12)
         palette.setBrush(QPalette.Inactive, QPalette.Shadow, brush)
         palette.setBrush(QPalette.Inactive, QPalette.AlternateBase, brush3)
-        palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush6)
+        palette.setBrush(QPalette.Inactive, QPalette.ToolTipBase, brush8)
         palette.setBrush(QPalette.Inactive, QPalette.ToolTipText, brush)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush7)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush9)
 #endif
         palette.setBrush(QPalette.Inactive, QPalette.Accent, brush2)
         palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush4)
-        palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        gradient6 = QLinearGradient(0, 0, 1, 0)
+        gradient6.setSpread(QGradient.PadSpread)
+        gradient6.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient6.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient6.setColorAt(1, QColor(25, 50, 70, 200))
+        brush13 = QBrush(gradient6)
+        palette.setBrush(QPalette.Disabled, QPalette.Button, brush13)
         palette.setBrush(QPalette.Disabled, QPalette.Light, brush2)
         palette.setBrush(QPalette.Disabled, QPalette.Midlight, brush3)
         palette.setBrush(QPalette.Disabled, QPalette.Dark, brush4)
@@ -82,27 +123,157 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.Disabled, QPalette.Text, brush4)
         palette.setBrush(QPalette.Disabled, QPalette.BrightText, brush2)
         palette.setBrush(QPalette.Disabled, QPalette.ButtonText, brush4)
-        palette.setBrush(QPalette.Disabled, QPalette.Base, brush1)
-        palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+        gradient7 = QLinearGradient(0, 0, 1, 0)
+        gradient7.setSpread(QGradient.PadSpread)
+        gradient7.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient7.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient7.setColorAt(1, QColor(25, 50, 70, 200))
+        brush14 = QBrush(gradient7)
+        palette.setBrush(QPalette.Disabled, QPalette.Base, brush14)
+        gradient8 = QLinearGradient(0, 0, 1, 0)
+        gradient8.setSpread(QGradient.PadSpread)
+        gradient8.setCoordinateMode(QGradient.ObjectBoundingMode)
+        gradient8.setColorAt(0, QColor(10, 25, 47, 200))
+        gradient8.setColorAt(1, QColor(25, 50, 70, 200))
+        brush15 = QBrush(gradient8)
+        palette.setBrush(QPalette.Disabled, QPalette.Window, brush15)
         palette.setBrush(QPalette.Disabled, QPalette.Shadow, brush)
-        palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush1)
-        palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush6)
+        brush16 = QBrush(QColor(234, 234, 234, 255))
+        brush16.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Disabled, QPalette.AlternateBase, brush16)
+        palette.setBrush(QPalette.Disabled, QPalette.ToolTipBase, brush8)
         palette.setBrush(QPalette.Disabled, QPalette.ToolTipText, brush)
-        brush8 = QBrush(QColor(117, 117, 117, 127))
-        brush8.setStyle(Qt.SolidPattern)
+        brush17 = QBrush(QColor(117, 117, 117, 127))
+        brush17.setStyle(Qt.SolidPattern)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush8)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush17)
 #endif
         palette.setBrush(QPalette.Disabled, QPalette.Accent, brush2)
         MainWindow.setPalette(palette)
+        MainWindow.setStyleSheet(u"""
+        QWidget#MainWindow {
+            background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(10, 25, 47, 200), stop:1 rgba(25, 50, 70, 200));
+        }
+        
+        QDialog#AboutDialogWindow {
+            background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(10, 25, 47, 200), stop:1 rgba(25, 50, 70, 200));
+        }
+
+        QWidget#verticalLayoutWidget { /* Assuming you have a widget that holds the QVBoxLayout */
+            background-color: rgba(0, 0, 0, 0); /* Fully transparent */
+        }
+
+        QStackedWidget#stackedWidget {
+            background-color: rgba(0, 0, 0, 0); /* Fully transparent */
+        }
+
+        QLabel, QPushButton, QRadioButton, QCheckBox, QProgressBar {
+            color: rgba(225, 245, 254, 255); /* Slightly blue-tinted white for better readability */
+            font: 11pt "Segoe UI"; /* More modern and professional font */
+        }
+
+        QPushButton {
+            background-color: rgba(70, 130, 180, 255); /* Softer blue for buttons */
+            border: 1px solid rgba(60, 120, 170, 255); /* Slightly darker border for depth */
+            border-radius: 4px; /* Rounded corners for a modern look */
+        }
+
+        QPushButton:hover {
+            background-color: rgba(85, 145, 195, 255); /* Lighter on hover for interactive effect */
+        }
+
+        QPushButton:pressed {
+            background-color: rgba(60, 110, 160, 255); /* Darker when pressed to simulate depth */
+        }
+
+        QProgressBar {
+            background-color: rgba(35, 35, 70, 240); /* Dark background for contrast */
+            border: 1px solid #2E2E5E; /* Slightly lighter border for subtle contrast */
+            border-radius: 4px; /* Consistent rounded corners */
+            padding: 2px; /* Adjust as necessary */
+            margin: 0px; /* Adjust based on your layout needs */
+            text-align: center; /* Ensure text is centered, might not affect all styles */
+        }
+
+        QProgressBar::chunk {
+            background-color: rgba(95, 185, 234, 255); /* Brighter, more vibrant progress color */
+            border-radius: 3px; /* Rounded corners inside the progress bar */
+        }
+
+        QLineEdit, QTextEdit {
+            color: rgba(173, 216, 230, 255); /* Light blue color for text */
+            /* Other properties like background-color, border, etc., can be added here as needed */
+        }
+
+        QLineEdit {
+            background-color: rgba(40, 40, 40, 240); /* Dark background for contrast */
+            border: 1px solid rgba(60, 60, 60, 240); /* Slightly lighter border for visibility */
+            border-radius: 4px; /* Rounded corners for a modern look */
+        }
+
+        QTextEdit {
+            background-color: rgba(40, 40, 40, 240); /* Dark background for contrast */
+            border: 1px solid rgba(60, 60, 60, 240); /* Slightly lighter border for visibility */
+            border-radius: 4px; /* Consistent with QLineEdit for a unified look */
+        }
+
+        QTabWidget::pane { /* The tab widget frame */
+            border-top: 2px solid rgba(10, 25, 47, 180); /* Dark blue, slightly transparent border */
+        }
+
+        QTabWidget::tab-bar {
+            alignment: center; /* Adjust the alignment of tabs as needed */
+        }
+
+        QTabBar::tab {
+            background: rgba(10, 25, 47, 180); /* Dark blue, slightly transparent background for tabs */
+            color: rgba(225, 245, 254, 255); /* Light text color for contrast */
+            padding: 5px; /* Adjust padding as needed */
+            border: 1px solid rgba(25, 50, 70, 180); /* Slightly lighter blue for the border, slightly transparent */
+            border-bottom-color: transparent; /* Make the bottom border transparent for a seamless look */
+            min-width: 80px; /* Adjust the minimum width as needed */
+            min-height: 20px; /* Adjust the minimum height as needed */
+        }
+
+        QTabBar::tab:selected, QTabBar::tab:hover {
+            background: rgba(25, 50, 70, 200); /* Slightly lighter and less transparent for the active or hovered tab */
+            border-bottom-color: none; /* Can remove the bottom border for the selected tab if desired */
+        }
+
+        QTabBar::tab:!selected {
+            margin-top: 2px; /* Slightly raise the unselected tabs to make the selected tab stand out */
+        }
+
+        QLabel {
+            font: 11pt "Segoe UI"; /* Match the font size and family with QPushButton */
+            color: rgba(225, 245, 254, 255); /* Adjust color as needed, here using a light color for contrast */
+        }
+
+        QPushButton, QRadioButton, QCheckBox {
+            font: 11pt "Segoe UI"; /* Set a common font size and family for consistency */
+            color: rgba(225, 245, 254, 255); /* Adjust color as needed */
+        }
+
+        QRadioButton, QCheckBox {
+            font-size: 10pt; /* Set a smaller font size than QPushButton */
+        }
+
+        QTextEdit#AboutDialogText {
+            font: 12pt "Courier";
+        }
+
+        QLabel#AboutDialogLabel {
+            font: 10pt;
+        }
+        """)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.pushLogsButton = QPushButton(self.centralwidget)
-        self.pushLogsButton.setObjectName(u"pushLogsButton")
-        self.pushLogsButton.setGeometry(QRect(1, 420, 109, 24))
+        self.pushAboutButton = QPushButton(self.centralwidget)
+        self.pushAboutButton.setObjectName(u"pushAboutButton")
+        self.pushAboutButton.setGeometry(QRect(1, 420, 109, 24))
         self.line = QFrame(self.centralwidget)
         self.line.setObjectName(u"line")
-        self.line.setGeometry(QRect(80, 0, 71, 461))
+        self.line.setGeometry(QRect(110, 0, 16, 480))
         self.line.setFrameShape(QFrame.VLine)
         self.line.setFrameShadow(QFrame.Sunken)
         self.stackedWidget = QStackedWidget(self.centralwidget)
@@ -131,13 +302,13 @@ class Ui_MainWindow(object):
         self.OutputEncryptionTextBox.setReadOnly(True)
         self.labelText_1 = QLabel(self.EncryptTextTab)
         self.labelText_1.setObjectName(u"labelText_1")
-        self.labelText_1.setGeometry(QRect(40, 20, 61, 16))
+        self.labelText_1.setGeometry(QRect(40, 20, 71, 21))
         self.labelText_2 = QLabel(self.EncryptTextTab)
         self.labelText_2.setObjectName(u"labelText_2")
         self.labelText_2.setGeometry(QRect(40, 130, 61, 16))
         self.labelText_3 = QLabel(self.EncryptTextTab)
         self.labelText_3.setObjectName(u"labelText_3")
-        self.labelText_3.setGeometry(QRect(40, 240, 121, 16))
+        self.labelText_3.setGeometry(QRect(40, 240, 151, 21))
         self.checkTextPasswordEncrBox = QCheckBox(self.EncryptTextTab)
         self.checkTextPasswordEncrBox.setObjectName(u"checkTextPasswordEncrBox")
         self.checkTextPasswordEncrBox.setGeometry(QRect(30, 180, 111, 20))
@@ -159,13 +330,13 @@ class Ui_MainWindow(object):
         self.InputDecryptionPasswordLine.setGeometry(QRect(30, 150, 191, 22))
         self.labelText_4 = QLabel(self.DecryptTextTab)
         self.labelText_4.setObjectName(u"labelText_4")
-        self.labelText_4.setGeometry(QRect(40, 20, 111, 16))
+        self.labelText_4.setGeometry(QRect(40, 20, 141, 21))
         self.labelText_5 = QLabel(self.DecryptTextTab)
         self.labelText_5.setObjectName(u"labelText_5")
-        self.labelText_5.setGeometry(QRect(40, 130, 111, 16))
+        self.labelText_5.setGeometry(QRect(40, 130, 61, 16))
         self.labelText_6 = QLabel(self.DecryptTextTab)
         self.labelText_6.setObjectName(u"labelText_6")
-        self.labelText_6.setGeometry(QRect(40, 240, 131, 16))
+        self.labelText_6.setGeometry(QRect(40, 240, 151, 21))
         self.checkTextPasswordDecrBox = QCheckBox(self.DecryptTextTab)
         self.checkTextPasswordDecrBox.setObjectName(u"checkTextPasswordDecrBox")
         self.checkTextPasswordDecrBox.setGeometry(QRect(30, 180, 111, 20))
@@ -179,7 +350,7 @@ class Ui_MainWindow(object):
         self.progressFileBar.setValue(0)
         self.pushOpenFileButton = QPushButton(self.FileStackedWidget)
         self.pushOpenFileButton.setObjectName(u"pushOpenFileButton")
-        self.pushOpenFileButton.setGeometry(QRect(390, 170, 101, 41))
+        self.pushOpenFileButton.setGeometry(QRect(410, 170, 101, 41))
         self.pushFileActionButton = QPushButton(self.FileStackedWidget)
         self.pushFileActionButton.setObjectName(u"pushFileActionButton")
         self.pushFileActionButton.setGeometry(QRect(40, 400, 451, 51))
@@ -188,47 +359,35 @@ class Ui_MainWindow(object):
         self.buttonGroup.setObjectName(u"buttonGroup")
         self.buttonGroup.addButton(self.radioDecryptionButton)
         self.radioDecryptionButton.setObjectName(u"radioDecryptionButton")
-        self.radioDecryptionButton.setGeometry(QRect(280, 280, 89, 20))
+        self.radioDecryptionButton.setGeometry(QRect(300, 280, 89, 20))
         self.radioEncryptionButton = QRadioButton(self.FileStackedWidget)
         self.buttonGroup.addButton(self.radioEncryptionButton)
         self.radioEncryptionButton.setObjectName(u"radioEncryptionButton")
-        self.radioEncryptionButton.setGeometry(QRect(280, 250, 89, 20))
+        self.radioEncryptionButton.setGeometry(QRect(300, 250, 89, 20))
         self.radioEncryptionButton.setChecked(True)
         self.lineFilePath = QLineEdit(self.FileStackedWidget)
         self.lineFilePath.setObjectName(u"lineFilePath")
-        self.lineFilePath.setGeometry(QRect(100, 180, 281, 22))
+        self.lineFilePath.setGeometry(QRect(120, 180, 281, 22))
         self.lineFilePath.setReadOnly(True)
         self.labelFile_1 = QLabel(self.FileStackedWidget)
         self.labelFile_1.setObjectName(u"labelFile_1")
-        self.labelFile_1.setGeometry(QRect(40, 180, 51, 21))
+        self.labelFile_1.setGeometry(QRect(60, 180, 51, 21))
         self.labelFile_3 = QLabel(self.FileStackedWidget)
         self.labelFile_3.setObjectName(u"labelFile_3")
-        self.labelFile_3.setGeometry(QRect(30, 260, 61, 21))
+        self.labelFile_3.setGeometry(QRect(50, 260, 61, 21))
         self.lineFilePassword = QLineEdit(self.FileStackedWidget)
         self.lineFilePassword.setObjectName(u"lineFilePassword")
-        self.lineFilePassword.setGeometry(QRect(100, 260, 141, 22))
+        self.lineFilePassword.setGeometry(QRect(120, 260, 141, 22))
         self.checkFilePasswordBox = QCheckBox(self.FileStackedWidget)
         self.checkFilePasswordBox.setObjectName(u"checkFilePasswordBox")
-        self.checkFilePasswordBox.setGeometry(QRect(100, 290, 111, 20))
+        self.checkFilePasswordBox.setGeometry(QRect(120, 290, 121, 20))
         self.lineNewFileName = QLineEdit(self.FileStackedWidget)
         self.lineNewFileName.setObjectName(u"lineNewFileName")
-        self.lineNewFileName.setGeometry(QRect(100, 220, 141, 22))
+        self.lineNewFileName.setGeometry(QRect(120, 220, 141, 22))
         self.labelFile_2 = QLabel(self.FileStackedWidget)
         self.labelFile_2.setObjectName(u"labelFile_2")
-        self.labelFile_2.setGeometry(QRect(0, 220, 91, 21))
+        self.labelFile_2.setGeometry(QRect(20, 220, 91, 21))
         self.stackedWidget.addWidget(self.FileStackedWidget)
-        self.ContainerStackedWidget = QWidget()
-        self.ContainerStackedWidget.setObjectName(u"ContainerStackedWidget")
-        self.ContainerTabWidget = QTabWidget(self.ContainerStackedWidget)
-        self.ContainerTabWidget.setObjectName(u"ContainerTabWidget")
-        self.ContainerTabWidget.setGeometry(QRect(0, 0, 511, 441))
-        self.CreateContainerTab = QWidget()
-        self.CreateContainerTab.setObjectName(u"CreateContainerTab")
-        self.ContainerTabWidget.addTab(self.CreateContainerTab, "")
-        self.OpenContainerTab = QWidget()
-        self.OpenContainerTab.setObjectName(u"OpenContainerTab")
-        self.ContainerTabWidget.addTab(self.OpenContainerTab, "")
-        self.stackedWidget.addWidget(self.ContainerStackedWidget)
         self.layoutWidget = QWidget(self.centralwidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(0, 60, 111, 161))
@@ -254,32 +413,24 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.pushFileButton)
 
-        self.pushContainerButton = QPushButton(self.layoutWidget)
-        self.sidePanelButtonGroup.addButton(self.pushContainerButton)
-        self.pushContainerButton.setObjectName(u"pushContainerButton")
-        self.pushContainerButton.setMinimumSize(QSize(0, 40))
-        self.pushContainerButton.setCheckable(True)
-
-        self.verticalLayout.addWidget(self.pushContainerButton)
-
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 640, 22))
+        self.menubar.setGeometry(QRect(0, 0, 640, 23))
         MainWindow.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(0)
         self.TextTabWidget.setCurrentIndex(0)
-        self.ContainerTabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"AES PyEncryptor", None))
-        self.pushLogsButton.setText(QCoreApplication.translate("MainWindow", u"Logs", None))
+        self.pushAboutButton.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.EncryptTextButton.setText(QCoreApplication.translate("MainWindow", u"Encrypt", None))
         self.labelText_1.setText(QCoreApplication.translate("MainWindow", u"Input Text", None))
         self.labelText_2.setText(QCoreApplication.translate("MainWindow", u"Password", None))
@@ -300,9 +451,6 @@ class Ui_MainWindow(object):
         self.labelFile_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">Password</span></p></body></html>", None))
         self.checkFilePasswordBox.setText(QCoreApplication.translate("MainWindow", u"Show password", None))
         self.labelFile_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:10pt;\">New File Name</span></p></body></html>", None))
-        self.ContainerTabWidget.setTabText(self.ContainerTabWidget.indexOf(self.CreateContainerTab), QCoreApplication.translate("MainWindow", u"Create", None))
-        self.ContainerTabWidget.setTabText(self.ContainerTabWidget.indexOf(self.OpenContainerTab), QCoreApplication.translate("MainWindow", u"Open", None))
         self.pushTextButton.setText(QCoreApplication.translate("MainWindow", u"Text", None))
         self.pushFileButton.setText(QCoreApplication.translate("MainWindow", u"File", None))
-        self.pushContainerButton.setText(QCoreApplication.translate("MainWindow", u"Container", None))
     # retranslateUi
