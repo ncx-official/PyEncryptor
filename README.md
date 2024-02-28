@@ -17,7 +17,8 @@ Before running the application, ensure you have Python installed on your machine
 pip install PySide6 cryptography
 ```
 ## Screenshots
-
+![UI of text encryption and decryption features](/Screenshots/TextTab.png?raw=true "Text Tab")
+![UI of files encryption and decryption features](/Screenshots/FileTab.png?raw=true "File Tab")
 ## Contributing
 Contributions are welcome! Please feel free to submit pull requests, report bugs, or suggest new features.
 
