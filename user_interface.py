@@ -20,6 +20,7 @@ class UserInterface(QMainWindow, Ui_MainWindow):
         self.radioDecryptionButton.clicked.connect(self.onRadioFileButtonClicked)  
         self.pushAboutButton.clicked.connect(self.showAboutPopUp)
         self.radioEncryptionButton.click()
+        self.TextTabWidget.currentChanged.connect(self.clearTextEncryptionFields)
         
         # Show password checkboxes
         self.checkFilePasswordBox.stateChanged.connect(self.toggleFilePasswordVisibility)
@@ -136,6 +137,15 @@ class UserInterface(QMainWindow, Ui_MainWindow):
             errorDialog.setText(f"<font color='black'>{message}</font>")
             errorDialog.setStandardButtons(QMessageBox.Ok)
             errorDialog.exec()  # Display the dialog
+    
+    def clearTextEncryptionFields(self):
+        self.InputEncryptionTextBox.clear()
+        self.InputDecryptionTextBox.clear()
+        self.InputEncryptionPasswordLine.clear()
+        self.InputDecryptionPasswordLine.clear()
+
+        self.OutputDecryptionTextBox.clear()
+        self.OutputEncryptionTextBox.clear()
 
 class AboutDialog(QDialog):
     def __init__(self, parent=None):
